@@ -1,0 +1,28 @@
+=================================================================
+   HYBRID U-NET FOR BREAST TUMOUR SEGMENTATION — RESULTS
+=================================================================
+
+Dataset     : BUSI (Breast Ultrasound Images)
+Categories  : benign, malignant, normal
+Train/Val   : 80% / 20% (seed=42)
+Image size  : 256 x 256
+Epochs      : 25
+Optimizer   : Adam (lr=1e-4, weight_decay=1e-5)
+Loss        : BCE + Dice
+Augmentation: HFlip, VFlip, Rotation±15°, Brightness jitter
+
+Architecture — Hybrid U-Net:
+  - CNN Encoder (4 levels, 64→128→256→512 channels)
+  - ViT Bottleneck (1024 channels, 16x16 tokens, 8-head, 2 layers)
+  - Attention-Gated Decoder (4 attention gates)
+
+-----------------------------------------------------------------
+Metric             Baseline U-Net         Hybrid U-Net
+-----------------------------------------------------------------
+Dice             0.6323±0.3403       0.6009±0.3589
+IoU              0.5457±0.3405       0.5187±0.3518
+Precision        0.6280±0.3579       0.6377±0.3592
+Recall           0.6213±0.3825       0.6045±0.4019
+=================================================================
+Dice improvement: +-3.14%
+IoU  improvement: +-2.70%
